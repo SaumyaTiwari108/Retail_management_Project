@@ -27,6 +27,7 @@ public class DataInitializer implements CommandLineRunner {
     private final StockMovementRepository stockMovementRepository;
     private final SupplierRepository supplierRepository;
     private final CustomerRepository customerRepository;
+    private final AppSettingRepository appSettingRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -272,6 +273,18 @@ public class DataInitializer implements CommandLineRunner {
                 .build();
 
         customerRepository.saveAll(List.of(c1, c2));
+
+        // 9. Application Settings
+        AppSetting s1 = AppSetting.builder().settingKey("company_name").settingValue("XYZ Retail Corporation").description("Official registered business entity name").build();
+        AppSetting s2 = AppSetting.builder().settingKey("company_email").settingValue("operations@xyzretail.com").description("Customer and vendor operations contact email").build();
+        AppSetting s3 = AppSetting.builder().settingKey("currency_code").settingValue("USD").description("System accounting base currency code (ISO 4217)").build();
+        AppSetting s4 = AppSetting.builder().settingKey("currency_symbol").settingValue("$").description("Currency display symbol").build();
+        AppSetting s5 = AppSetting.builder().settingKey("default_tax_rate").settingValue("8.25").description("Standard POS state/local sales tax rate (%)").build();
+        AppSetting s6 = AppSetting.builder().settingKey("low_stock_threshold").settingValue("10").description("Global safety stock alert threshold").build();
+        AppSetting s7 = AppSetting.builder().settingKey("invoice_prefix").settingValue("INV-XYZ-").description("Order sales invoice numbering prefix").build();
+        AppSetting s8 = AppSetting.builder().settingKey("auto_reorder_enabled").settingValue("true").description("Automated inventory replenishment recommendations").build();
+
+        appSettingRepository.saveAll(List.of(s1, s2, s3, s4, s5, s6, s7, s8));
 
         log.info("Demonstration seed data initialization complete.");
     }

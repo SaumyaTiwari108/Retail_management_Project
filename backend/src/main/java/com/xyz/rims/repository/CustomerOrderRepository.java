@@ -12,10 +12,11 @@ import java.util.Optional;
 public interface CustomerOrderRepository extends JpaRepository<CustomerOrder, Long> {
     Optional<CustomerOrder> findByOrderNumber(String orderNumber);
     boolean existsByOrderNumber(String orderNumber);
+    boolean existsByCustomerId(Long customerId);
     List<CustomerOrder> findByStatus(CustomerOrder.OrderStatus status);
     List<CustomerOrder> findTop10ByOrderByOrderDateDesc();
     long countByStatus(CustomerOrder.OrderStatus status);
 
-    @Query("SELECT COALESCE(SUM(o.totalAmount), 0) FROM CustomerOrder o WHERE o.status != 'CANCELLED'")
+    @Query("SELECT COALESCE(SUM(o.totalAmount), 0) FROM CustomerOrder o WHERE o.status != com.xyz.rims.model.CustomerOrder.OrderStatus.CANCELLED")
     BigDecimal calculateTotalRevenue();
 }

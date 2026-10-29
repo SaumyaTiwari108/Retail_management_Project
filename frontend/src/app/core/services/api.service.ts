@@ -10,10 +10,13 @@ import {
   StockMovement,
   Supplier,
   PurchaseOrder,
+  Customer,
   CustomerOrder,
   DashboardStats,
   ReorderRecommendation,
-  AuditLog
+  AuditLog,
+  AppUser,
+  AppSetting
 } from '../models/models';
 
 @Injectable({
@@ -204,5 +207,70 @@ export class ApiService {
   // Audit Logs
   getAuditLogs(): Observable<ApiResponse<AuditLog[]>> {
     return this.http.get<ApiResponse<AuditLog[]>>(`${this.baseUrl}/audit/logs`);
+  }
+
+  // Customers
+  getCustomers(search?: string): Observable<ApiResponse<Customer[]>> {
+    let params = new HttpParams();
+    if (search) params = params.set('search', search);
+    return this.http.get<ApiResponse<Customer[]>>(`${this.baseUrl}/customers`, { params });
+  }
+
+  getCustomerById(id: number): Observable<ApiResponse<Customer>> {
+    return this.http.get<ApiResponse<Customer>>(`${this.baseUrl}/customers/${id}`);
+  }
+
+  createCustomer(customer: Customer): Observable<ApiResponse<Customer>> {
+    return this.http.post<ApiResponse<Customer>>(`${this.baseUrl}/customers`, customer);
+  }
+
+  updateCustomer(id: number, customer: Customer): Observable<ApiResponse<Customer>> {
+    return this.http.put<ApiResponse<Customer>>(`${this.baseUrl}/customers/${id}`, customer);
+  }
+
+  deleteCustomer(id: number): Observable<ApiResponse<void>> {
+    return this.http.delete<ApiResponse<void>>(`${this.baseUrl}/customers/${id}`);
+  }
+
+  // Users (Admin)
+  getUsers(): Observable<ApiResponse<AppUser[]>> {
+    return this.http.get<ApiResponse<AppUser[]>>(`${this.baseUrl}/users`);
+  }
+
+  getUserById(id: number): Observable<ApiResponse<AppUser>> {
+    return this.http.get<ApiResponse<AppUser>>(`${this.baseUrl}/users/${id}`);
+  }
+
+  createUser(user: AppUser): Observable<ApiResponse<AppUser>> {
+    return this.http.post<ApiResponse<AppUser>>(`${this.baseUrl}/users`, user);
+  }
+
+  updateUser(id: number, user: AppUser): Observable<ApiResponse<AppUser>> {
+    return this.http.put<ApiResponse<AppUser>>(`${this.baseUrl}/users/${id}`, user);
+  }
+
+  toggleUserStatus(id: number): Observable<ApiResponse<AppUser>> {
+    return this.http.put<ApiResponse<AppUser>>(`${this.baseUrl}/users/${id}/toggle-status`, {});
+  }
+
+  changeUserRole(id: number, role: string): Observable<ApiResponse<AppUser>> {
+    return this.http.put<ApiResponse<AppUser>>(`${this.baseUrl}/users/${id}/role`, { role });
+  }
+
+  // Settings
+  getSettings(): Observable<ApiResponse<{ [key: string]: string }>> {
+    return this.http.get<ApiResponse<{ [key: string]: string }>>(`${this.baseUrl}/settings`);
+  }
+
+  getSettingsList(): Observable<ApiResponse<AppSetting[]>> {
+    return this.http.get<ApiResponse<AppSetting[]>>(`${this.baseUrl}/settings/list`);
+  }
+
+  updateSettings(settings: { [key: string]: string }): Observable<ApiResponse<void>> {
+    return this.http.put<ApiResponse<void>>(`${this.baseUrl}/settings`, settings);
+  }
+
+  saveSetting(setting: AppSetting): Observable<ApiResponse<AppSetting>> {
+    return this.http.post<ApiResponse<AppSetting>>(`${this.baseUrl}/settings`, setting);
   }
 }

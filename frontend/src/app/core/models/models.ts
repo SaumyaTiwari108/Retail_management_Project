@@ -129,6 +129,26 @@ export interface Customer {
   email?: string;
   phone?: string;
   address?: string;
+  createdAt?: string;
+}
+
+export interface AppUser {
+  id?: number;
+  username: string;
+  password?: string;
+  fullName: string;
+  email: string;
+  role: 'ROLE_ADMIN' | 'ROLE_INVENTORY_MANAGER' | 'ROLE_STAFF';
+  active: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface AppSetting {
+  id?: number;
+  settingKey: string;
+  settingValue: string;
+  description?: string;
 }
 
 export interface CustomerOrderItem {

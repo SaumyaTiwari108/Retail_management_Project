@@ -47,18 +47,21 @@ public class InventoryServiceImpl implements InventoryService {
                     .orElseThrow(() -> new BadRequestException("No active warehouse found in system"));
         }
 
+        if (request.getQuantity() == null || request.getQuantity() == 0) {
+            throw new BadRequestException("Quantity must not be zero");
+        }
+
         int previousGlobalStock = product.getCurrentStock();
         int delta = 0;
 
         if (request.getMovementType() == StockMovement.MovementType.RECEIVING) {
-            delta = request.getQuantity();
+            delta = Math.abs(request.getQuantity());
         } else if (request.getMovementType() == StockMovement.MovementType.SALE) {
-            delta = -request.getQuantity();
-            if (previousGlobalStock < request.getQuantity()) {
-                throw new BadRequestException("Insufficient total stock: requested " + request.getQuantity() + ", available " + previousGlobalStock);
+            delta = -Math.abs(request.getQuantity());
+            if (previousGlobalStock < Math.abs(request.getQuantity())) {
+                throw new BadRequestException("Insufficient total stock: requested " + Math.abs(request.getQuantity()) + ", available " + previousGlobalStock);
             }
         } else if (request.getMovementType() == StockMovement.MovementType.ADJUSTMENT) {
-            // In adjustment, quantity is the new target or delta. Let's treat delta as quantity directly if signed or difference.
             delta = request.getQuantity();
             if (previousGlobalStock + delta < 0) {
                 throw new BadRequestException("Adjustment would cause stock to fall below 0");

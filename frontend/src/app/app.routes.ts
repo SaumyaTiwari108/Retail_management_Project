@@ -14,6 +14,9 @@ import { SmartReorderComponent } from './features/smart-reorder/smart-reorder.co
 import { BarcodeScannerComponent } from './features/barcode/barcode-scanner.component';
 import { ReportsComponent } from './features/reports/reports.component';
 import { AuditTrailComponent } from './features/audit/audit-trail.component';
+import { CustomersComponent } from './features/customers/customers.component';
+import { UsersComponent } from './features/users/users.component';
+import { SettingsComponent } from './features/settings/settings.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -31,10 +34,13 @@ export const routes: Routes = [
       { path: 'suppliers', component: SuppliersComponent },
       { path: 'purchase-orders', component: PurchaseOrdersComponent },
       { path: 'orders', component: SalesOrdersComponent },
+      { path: 'customers', component: CustomersComponent },
       { path: 'smart-reorder', component: SmartReorderComponent },
       { path: 'barcode', component: BarcodeScannerComponent },
       { path: 'reports', component: ReportsComponent },
-      { path: 'audit', component: AuditTrailComponent }
+      { path: 'users', component: UsersComponent },
+      { path: 'audit', component: AuditTrailComponent },
+      { path: 'settings', component: SettingsComponent }
     ]
   },
   { path: '**', redirectTo: 'dashboard' }

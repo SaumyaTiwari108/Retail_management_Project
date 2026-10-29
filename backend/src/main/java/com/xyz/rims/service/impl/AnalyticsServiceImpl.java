@@ -44,7 +44,7 @@ public class AnalyticsServiceImpl implements AnalyticsService {
         Map<String, Long> stockByCategory = new HashMap<>();
         List<Product> allProducts = productRepository.findAll();
         for (Product p : allProducts) {
-            String catName = p.getCategory().getName();
+            String catName = p.getCategory() != null ? p.getCategory().getName() : "Uncategorized";
             stockByCategory.put(catName, stockByCategory.getOrDefault(catName, 0L) + p.getCurrentStock());
         }
 
@@ -123,7 +123,7 @@ public class AnalyticsServiceImpl implements AnalyticsService {
                         .productId(p.getId())
                         .sku(p.getSku())
                         .productName(p.getName())
-                        .categoryName(p.getCategory().getName())
+                        .categoryName(p.getCategory() != null ? p.getCategory().getName() : "General")
                         .currentStock(current)
                         .reorderLevel(reorder)
                         .recommendedOrderQuantity(recommendedQty)

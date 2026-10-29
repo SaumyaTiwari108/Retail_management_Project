@@ -59,6 +59,9 @@ c:\Retail_management_Project
    - `ROLE_INVENTORY_MANAGER`: Catalog, stock movements, purchase orders, transfers, and reports.
    - `ROLE_STAFF`: Store-level POS order entry, scanning, and order receipt.
 10. **Module J — Immutable Audit Trail:** Automated activity logging for product adjustments, status alterations, and user authorizations.
+11. **Module K — Customer Management Directory:** Complete customer accounts directory with contact information, order histories, and safe deletion integrity.
+12. **Module L — User Management & RBAC Administration:** Operator provisioning, credential updates, security role assignment, and active/inactive status toggle.
+13. **Module M — System Configuration & Settings:** Global company branding, base currency selection, default tax rates, safety thresholds, and auto-reorder configuration.
 
 ---
 

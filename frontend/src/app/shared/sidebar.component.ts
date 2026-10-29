@@ -102,6 +102,12 @@ import { AuthService } from '../core/services/auth.service';
               <span>Customer Sales</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a routerLink="/customers" routerLinkActive="active" class="nav-link rims-nav-link d-flex align-items-center gap-3 px-3 py-2 rounded">
+              <i class="bi bi-people-fill"></i>
+              <span>Customers</span>
+            </a>
+          </li>
         </ul>
 
         <!-- Reports & Administration -->
@@ -116,9 +122,21 @@ import { AuthService } from '../core/services/auth.service';
             </a>
           </li>
           <li class="nav-item" *ngIf="isAdmin()">
+            <a routerLink="/users" routerLinkActive="active" class="nav-link rims-nav-link d-flex align-items-center gap-3 px-3 py-2 rounded">
+              <i class="bi bi-person-gear"></i>
+              <span>User Accounts</span>
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="isAdmin()">
             <a routerLink="/audit" routerLinkActive="active" class="nav-link rims-nav-link d-flex align-items-center gap-3 px-3 py-2 rounded">
               <i class="bi bi-shield-check"></i>
               <span>Audit Trail</span>
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="isAdmin()">
+            <a routerLink="/settings" routerLinkActive="active" class="nav-link rims-nav-link d-flex align-items-center gap-3 px-3 py-2 rounded">
+              <i class="bi bi-gear-fill"></i>
+              <span>System Settings</span>
             </a>
           </li>
         </ul>

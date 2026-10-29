@@ -10,8 +10,8 @@ import java.util.List;
 public interface CustomerOrderItemRepository extends JpaRepository<CustomerOrderItem, Long> {
     List<CustomerOrderItem> findByCustomerOrderId(Long orderId);
 
-    @Query("SELECT coi.product.id, coi.product.name, SUM(coi.quantity) as totalSold " +
-           "FROM CustomerOrderItem coi WHERE coi.customerOrder.status != 'CANCELLED' " +
-           "GROUP BY coi.product.id, coi.product.name ORDER BY totalSold DESC")
+    @Query("SELECT coi.product.id, coi.product.name, SUM(coi.quantity) " +
+           "FROM CustomerOrderItem coi WHERE coi.customerOrder.status != com.xyz.rims.model.CustomerOrder.OrderStatus.CANCELLED " +
+           "GROUP BY coi.product.id, coi.product.name ORDER BY SUM(coi.quantity) DESC")
     List<Object[]> findTopSellingProducts();
 }

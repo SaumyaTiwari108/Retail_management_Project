@@ -51,6 +51,10 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
+  get currentUserValue(): User | null {
+    return this.currentUserSubject.value;
+  }
+
   hasRole(role: string): boolean {
     const user = this.getCurrentUser();
     return user ? user.role === role : false;

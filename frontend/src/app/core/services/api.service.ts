@@ -23,7 +23,7 @@ import {
   providedIn: 'root'
 })
 export class ApiService {
-  private readonly baseUrl = 'http://localhost:8080/api';
+  private readonly baseUrl = 'https://retail-management-project.onrender.com/api';
 
   constructor(private http: HttpClient) {}
 
